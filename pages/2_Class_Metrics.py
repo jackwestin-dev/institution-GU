@@ -37,7 +37,7 @@ if not check_password():
     st.stop()  # Do not continue if check_password is not True.
 
 ## Read data from CSV files
-df_engagement_attendance = pd.read_csv('./student-data/institution-cdu-engagement-data.csv',parse_dates=['start_date','end_date'])
+df_engagement_attendance = pd.read_csv('./student-data/institution-gu-engagement-data.csv',parse_dates=['start_date','end_date'])
 df_engagement_attendance['attendance'] = df_engagement_attendance['num_attended_large_session'] / df_engagement_attendance['num_scheduled_large_session']
 
 
