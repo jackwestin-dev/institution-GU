@@ -63,40 +63,6 @@ df_test_scores_student_filtered = df_test_scores[df_test_scores['student_id'] ==
 ## Create sections and render dashboard
 st.write(' ')
 st.write(' ')
-st.header('Participation')
-# st.write('The student has an aggregate weekly average rate of {class_participation:.1%} for class participation and {homework_participation:.1%} for homework participation. To date, overall participation is {overall_participation:.1%}.'.format(class_participation=class_participation,homework_participation=homework_participation,overall_participation=overall_participation))
-st.write(' ')
-st.write(' ')
-
-line_participation = alt.Chart(df_engagement_attendance_student_filtered).mark_line(point=True).transform_fold(
-    fold=['class_participation', 'homework_participation'], 
-    as_=['variable', 'value']
-).encode(
-    x=alt.X(
-        'week:O',
-        axis=alt.Axis(
-            labelAngle=0,
-            title='Week'
-        )
-    ),
-    y=alt.Y(
-        'value:Q',
-        axis=alt.Axis(
-            title='Participation Rate',
-            format='%'
-        )
-    ),
-    tooltip=[
-        alt.Tooltip('week:O',title='Week'),
-        alt.Tooltip('value:Q',title='Participation Rate',format='0.1%')
-    ],
-    color=alt.Color('variable:N',legend=alt.Legend(title='Setting',orient='bottom'))
-)
-
-st.altair_chart(line_participation,use_container_width=True)
-
-st.write(' ')
-st.write(' ')
 st.header('Accuracy')
 st.write(' ')
 st.write(' ')
@@ -232,6 +198,39 @@ line_question_sets = alt.Chart(df_engagement_attendance_student_filtered).mark_l
 )
 
 st.altair_chart(line_question_sets,use_container_width=True)
+
+st.header('Participation')
+# st.write('The student has an aggregate weekly average rate of {class_participation:.1%} for class participation and {homework_participation:.1%} for homework participation. To date, overall participation is {overall_participation:.1%}.'.format(class_participation=class_participation,homework_participation=homework_participation,overall_participation=overall_participation))
+st.write(' ')
+st.write(' ')
+
+line_participation = alt.Chart(df_engagement_attendance_student_filtered).mark_line(point=True).transform_fold(
+    fold=['class_participation', 'homework_participation'], 
+    as_=['variable', 'value']
+).encode(
+    x=alt.X(
+        'week:O',
+        axis=alt.Axis(
+            labelAngle=0,
+            title='Week'
+        )
+    ),
+    y=alt.Y(
+        'value:Q',
+        axis=alt.Axis(
+            title='Participation Rate',
+            format='%'
+        )
+    ),
+    tooltip=[
+        alt.Tooltip('week:O',title='Week'),
+        alt.Tooltip('value:Q',title='Participation Rate',format='0.1%')
+    ],
+    color=alt.Color('variable:N',legend=alt.Legend(title='Setting',orient='bottom'))
+)
+
+st.altair_chart(line_participation,use_container_width=True)
+
 st.header('Practice Exams')
 st.write(' ')
 st.write(' ')
